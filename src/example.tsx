@@ -34,6 +34,7 @@ const useStyles = makeStyles({
     whiteSpace: 'nowrap',
     boxSizing: 'border-box',
     border: '1px solid red',
+    backgroundColor: 'gray'
   },
 });
 
@@ -84,7 +85,12 @@ const generateTableArrays = (rowCount: number, columnCount: number) => {
 const cellRenderer: CellRenderer<TableUIData> = ({ item }, column, style) => {
   return (
     <DataGridCell
-      style={{ ...style, boxSizing: 'border-box', border: '1px solid red' }}
+      style={{ ...style,
+      boxSizing: 'border-box',
+      border: '1px solid red',
+      backgroundColor: column.columnId === 'column0' ? 'gray' : '',
+      borderTop: 'none'
+    }}
     >
       {column.renderCell(item)}
     </DataGridCell>
@@ -129,6 +135,7 @@ export const VirtualizedDataGrid: React.FunctionComponent = () => {
             itemSize={columnWidth}
             height={42}
             width={1000}
+            style={{ display: 'block', border: 'none'}}
           >
             {({ renderHeaderCell }, style) => {
               return (
